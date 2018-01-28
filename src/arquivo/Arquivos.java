@@ -5,6 +5,7 @@
  */
 package arquivo;
 
+import extensao_arquivos.ExtensaoArquivos;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -22,14 +23,15 @@ public class Arquivos {
     private static byte[] Arquivo;
     private static int totalDeArquivos;
 
+    private static void setTotalDeArquivos(int totalDeArquivos) {
+        Arquivos.totalDeArquivos = totalDeArquivos;
+    }
+    private static ExtensaoArquivos extensoes;
+
     public static int getTotalDeArquivos() {
         return totalDeArquivos;
     }
-
-    public static void setTotalDeArquivos(int totalDeArquivos) {
-        Arquivos.totalDeArquivos = totalDeArquivos;
-    }
-
+    
     public static byte[] getArquivo() {
         return Arquivo;
     }
@@ -79,7 +81,7 @@ public class Arquivos {
 
     }
 
-    public static void compiarArquivosDeUmDiretorioEspecifco(String caminhoOrigem, String caminhoDestino) {
+    public static void moverArquivosDeUmDiretorioEspecifico(String caminhoOrigem, String caminhoDestino) {
         try {
 
             if (caminhoDestino.trim().isEmpty() || caminhoOrigem.trim().isEmpty()) {
@@ -87,6 +89,10 @@ public class Arquivos {
             }
 
             File src = new File(caminhoOrigem);
+            
+            if(!src.exists()){
+                return;
+            }
 
             File[] files = src.listFiles();
 
@@ -151,7 +157,7 @@ public class Arquivos {
 
                 if (f.isDirectory()) {
                     arrayFile.addAll(buscaArquivos(f, extensao));
-                } else if (f.getName().endsWith(extensao)) {
+                } else if (f.getName().endsWith(extensao.toLowerCase())) {
                     arrayFile.add(f);
                 }
 
@@ -200,6 +206,27 @@ public class Arquivos {
             throw new RuntimeException(e.getMessage());
         }
        
+    }
+     
+    public static void moverArquivoTipoFotos(File diretorioDeBusca, File diretorioDestino){
+        extensoes = new ExtensaoArquivos();
+        for (String ex : extensoes.getExtensoesFotos()) {
+            moverArquivos(diretorioDeBusca, diretorioDestino, ex);
+        }
+    }
+    
+    public static void moverArquivoTipoMusica(File diretorioDeBusca, File diretorioDestino){
+        extensoes = new ExtensaoArquivos();
+        for (String ex : extensoes.getExtensoesMusica()) {
+            moverArquivos(diretorioDeBusca, diretorioDestino, ex);
+        }
+    }
+    
+    public static void moverArquivoTipoVideo(File diretorioDeBusca, File diretorioDestino){
+        extensoes = new ExtensaoArquivos();
+        for (String ex : extensoes.getExtensoesVideos()) {
+            moverArquivos(diretorioDeBusca, diretorioDestino, ex);
+        }
     }
 
 }

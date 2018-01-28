@@ -5,14 +5,10 @@
  */
 package testesClase;
 
-import arquivo.Arquivos;
-import java.io.File;
-import java.util.ArrayList;
-
 /**
  *
  * @author Andre
  */
-public class TesteClases {
+public  class TesteClases {
 
 }

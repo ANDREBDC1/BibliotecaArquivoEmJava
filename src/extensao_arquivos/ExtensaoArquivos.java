@@ -5,7 +5,7 @@
  */
 package extensao_arquivos;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -42,9 +42,29 @@ public class ExtensaoArquivos {
     public void setExtensoesVideos(ArrayList<String> extensoesVideos) {
         this.extensoesVideos = extensoesVideos;
     }
+
+    public ArrayList<String> getExtensoesTexto() {
+        return extensoesTexto;
+    }
+
+    public void setExtensoesTexto(ArrayList<String> extensoesTexto) {
+        this.extensoesTexto = extensoesTexto;
+    }
+
+    public ArrayList<String> getExtensoesCompactado() {
+        return extensoesCompactado;
+    }
+
+    public void setExtensoesCompactado(ArrayList<String> extensoesCompactado) {
+        this.extensoesCompactado = extensoesCompactado;
+    }
+    
+    
     private ArrayList<String> extensoesMusica;
     private ArrayList<String> extensoesVideos;
     private ArrayList<String> extensoesFotos;
+    private ArrayList<String> extensoesTexto;
+    private ArrayList<String> extensoesCompactado;
     
     public ExtensaoArquivos(){
         preencherExtencoes();
@@ -55,14 +75,21 @@ public class ExtensaoArquivos {
         ArrayList<String> extensaoFotos = new ArrayList<>();
         ArrayList<String> extensaoMusica = new ArrayList<>();
         ArrayList<String> extensaoVideos = new ArrayList<>();
+        ArrayList<String> extensaoTexto = new ArrayList<>();
+       ArrayList<String> extensaoCompactado = new ArrayList<>();
         
         extensaoFotos.addAll(Arrays.asList(".png", ".jpg", ".JPEG", ".GIF"));
         extensaoMusica.addAll(Arrays.asList(".mp3", ".opus"));
-        extensaoVideos.addAll(Arrays.asList(".mp4", ".av"));
+        extensaoVideos.addAll(Arrays.asList(".mp4",".WMA",".avi"));
+        extensaoTexto.addAll(Arrays.asList(".txt", ".doc",".PDF"));
+        extensaoCompactado.addAll(Arrays.asList(".ZIP", ".RAR",".7z"));
         
         setExtensoesFotos(extensaoFotos);
         setExtensoesMusica(extensaoMusica);
         setExtensoesVideos(extensaoVideos);
+        setExtensoesTexto(extensaoTexto);
+        setExtensoesCompactado(extensaoCompactado);
+        
     }
 
 }

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testesClase;
+package testes_classes;
 
 /**
  *
  * @author Andre
  */
-public  class TesteClases {
+public  class TesteClasses {
 
 }

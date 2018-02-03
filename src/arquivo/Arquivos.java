@@ -50,34 +50,11 @@ public class Arquivos extends File {
     public static void setFile(File file) {
         Arquivos.file = file;
     }
-    
-    public  static byte[] loadBytes(File file) {
-		FileInputStream in = null;
-		try {
-			in = new FileInputStream(file);
-			ByteArrayOutputStream byteArrayStream/* buffer */= new ByteArrayOutputStream();
-			int bytesread = 0;
-			byte[] tbuff = null;
-			while ((bytesread = in.read(tbuff)) != -1) {
-				byteArrayStream.write(tbuff, 0, bytesread);
-			}
-			return byteArrayStream.toByteArray();
-		} catch (IOException e) {
-			if (in != null) {
-				try {
-					in.close();
-				} catch (IOException e2) {
-				}
-			}
-			return null;
-		}
-	}
 
     public static byte[] coverterArquivoEmArrayDeByte(File file) {
-        FileInputStream fis;
-        long tam = file.length();
-        int  tamanho  = (int) tam;
-        byte[] conteudoByte = new byte[999999999];
+        FileInputStream fis;  
+        int  tamanho  = (int) file.length();;
+        byte[] conteudoByte = new byte[tamanho];
 
         try {
 

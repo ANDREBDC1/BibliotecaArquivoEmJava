@@ -5,16 +5,13 @@
  */
 package arquivo;
 
-import extensao_arquivos.ExtensaoArquivos;
-import java.io.ByteArrayOutputStream;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
-
 
 /**
  *
@@ -25,11 +22,15 @@ public class Arquivos extends File {
     private static File file;
     private static byte[] Arquivo;
     private static int totalDeArquivos;
-  
+    public static final String[] EXTENSOES_FOTOS = {".png", ".jpg", ".JPEG", ".GIF"};
+    public static final String[] EXTENSOES_MUSICAS = {".mp3", ".opus"};
+    public static final String[] EXTENSOES_TEXTOS = {".txt", ".doc", ".PDF"};
+    public static final String[] EXTENSOES_VIDEOS = {".mp4", ".WMA", ".avi"};
+    public static final String[] EXTENSOES_COMPACTADOS = {".ZIP", ".RAR", ".7z"};
+
     private static void setTotalDeArquivos(int totalDeArquivos) {
         Arquivos.totalDeArquivos = totalDeArquivos;
     }
-    private static ExtensaoArquivos extensoes;
 
     public static int getTotalDeArquivos() {
         return totalDeArquivos;
@@ -52,8 +53,8 @@ public class Arquivos extends File {
     }
 
     public static byte[] coverterArquivoEmArrayDeByte(File file) {
-        FileInputStream fis;  
-        int  tamanho  = (int) file.length();;
+        FileInputStream fis;
+        int tamanho = (int) file.length();;
         byte[] conteudoByte = new byte[tamanho];
 
         try {
@@ -173,9 +174,9 @@ public class Arquivos extends File {
     }
 
     private static ArrayList<File> buscaArquivosSubPasta(File file, String extensao) {
-        
+
         ArrayList<File> arrayFile = new ArrayList<>();
-       
+
         try {
             if (file == null || file.isHidden()) {
                 return arrayFile;
@@ -183,7 +184,6 @@ public class Arquivos extends File {
             for (File ff : file.listFiles()) {
 
                 // verificar se file e um diretorio e se não e um arquivo ocuto
-
                 if (ff.isDirectory() && !file.isHidden()) {
                     arrayFile.addAll(buscaArquivosSubPasta(ff, extensao));
                 } else if (ff.getName().toLowerCase().endsWith(extensao.toLowerCase())) {
@@ -237,67 +237,61 @@ public class Arquivos extends File {
     }
 
     public static void copiarArquivoTipoTexto(File diretorioDeBusca, File diretorioDestino) {
-        extensoes = new ExtensaoArquivos();
-        extensoes.getExtensoesTexto().stream().forEach((ex) -> {
+
+        for (String ex : EXTENSOES_TEXTOS) {
             copiarArquivos(diretorioDeBusca, diretorioDestino, ex);
-        });
+        }
     }
 
     public static void moverArquivoTipoTexto(File diretorioDeBusca, File diretorioDestino) {
-        extensoes = new ExtensaoArquivos();
-        extensoes.getExtensoesTexto().stream().forEach((ex) -> {
+        for (String ex : EXTENSOES_TEXTOS) {
             moverArquivos(diretorioDeBusca, diretorioDestino, ex);
-        });
+        }
     }
 
     public static void copiarArquivoTipoFotos(File diretorioDeBusca, File diretorioDestino) {
-        extensoes = new ExtensaoArquivos();
-        extensoes.getExtensoesFotos().stream().forEach((ex) -> {
+        for (String ex : EXTENSOES_FOTOS) {
             copiarArquivos(diretorioDeBusca, diretorioDestino, ex);
-        });
+        }
     }
 
     public static void copiarArquivoTipoMusica(File diretorioDeBusca, File diretorioDestino) {
-        extensoes = new ExtensaoArquivos();
-        extensoes.getExtensoesMusica().stream().forEach((ex) -> {
+        for (String ex : EXTENSOES_MUSICAS) {
             copiarArquivos(diretorioDeBusca, diretorioDestino, ex);
-        });
+        }
     }
 
     public static void copiarArquivoTipoVideo(File diretorioDeBusca, File diretorioDestino) {
-        extensoes = new ExtensaoArquivos();
-        extensoes.getExtensoesVideos().stream().forEach((ex) -> {
+        for (String ex : EXTENSOES_VIDEOS) {
             copiarArquivos(diretorioDeBusca, diretorioDestino, ex);
-        });
+        }
     }
 
     public static void moverArquivoTipoFotos(File diretorioDeBusca, File diretorioDestino) {
-        extensoes = new ExtensaoArquivos();
-        extensoes.getExtensoesFotos().stream().forEach((ex) -> {
+        for (String ex : EXTENSOES_FOTOS){
             moverArquivos(diretorioDeBusca, diretorioDestino, ex);
-        });
+        }
     }
 
     public static void moverArquivoTipoMusica(File diretorioDeBusca, File diretorioDestino) {
-        extensoes = new ExtensaoArquivos();
-        extensoes.getExtensoesMusica().stream().forEach((ex) -> {
+        for (String ex : EXTENSOES_MUSICAS) {
             moverArquivos(diretorioDeBusca, diretorioDestino, ex);
-        });
+        }
     }
 
     public static void moverArquivoTipoVideo(File diretorioDeBusca, File diretorioDestino) {
-        extensoes = new ExtensaoArquivos();
-        extensoes.getExtensoesVideos().stream().forEach((ex) -> {
+        for (String ex : EXTENSOES_VIDEOS){
             moverArquivos(diretorioDeBusca, diretorioDestino, ex);
-        });
+        }
     }
-    
-    public static void criarDiretorio(File file){
-        
-        if(!file.exists())
+
+    public static void criarDiretorio(File file) {
+
+        if (!file.exists()) {
             file.mkdirs();
+        }
     }
- 
+
     public Arquivos(String string) {
         super(string);
     }

@@ -27,6 +27,17 @@ public class Arquivos extends File {
     public static final String[] EXTENSOES_TEXTOS = {".txt", ".doc", ".PDF"};
     public static final String[] EXTENSOES_VIDEOS = {".mp4", ".WMA", ".avi"};
     public static final String[] EXTENSOES_COMPACTADOS = {".ZIP", ".RAR", ".7z"};
+    private static ArrayList<File>  filesIginorados;
+
+    public static ArrayList<File> getFilesIginorados() {
+        return filesIginorados;
+    }
+
+    private static void setFilesIginorados(ArrayList<File> filesIginorados) {
+        Arquivos.filesIginorados = filesIginorados;
+    }
+
+    
 
     private static void setTotalDeArquivos(int totalDeArquivos) {
         Arquivos.totalDeArquivos = totalDeArquivos;
@@ -146,6 +157,7 @@ public class Arquivos extends File {
 
     public static ArrayList<File> buscaArquivos(File file, String extensao) {
         try {
+            int tamMax = 99999999;
             if (extensao.trim().isEmpty()) {
                 throw new RuntimeException("Extensão não Informada!");
             }
@@ -162,11 +174,16 @@ public class Arquivos extends File {
                     }
 
                 } else if (f.getName().toLowerCase().endsWith(extensao.toLowerCase())) {
-                    arrayFile.add(f);
+                    if(f.length() > tamMax){
+                       filesIginorados.add(f);
+                    }else{
+                        arrayFile.add(f);
+                    }
+                    
                 }
             }
 
-            setTotalDeArquivos(arrayFile.size());
+            setTotalDeArquivos(arrayFile.size() + filesIginorados.size());
             return arrayFile;
         } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage());

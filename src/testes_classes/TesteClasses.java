@@ -83,8 +83,8 @@ class TesteClasses {
         System.out.println("Iniciar a copiar\n");
 
         Arquivos.buscaArquivos(new Arquivos("D:\\aquivos andre\\Nova pasta"),".iso");
-        System.out.println("\nTotal de arquivo inginirados: " + Arquivos.getFilesIginorados());
-        System.out.println("\nTotal de arquivo arquivos Encontrado: " + Arquivos.getFilesIginorados());
+        System.out.println("\nTotal de arquivo inginirados: " + Arquivos.getFilesInginorados().size());
+        System.out.println("\nTotal de arquivo arquivos Encontrado: " + Arquivos.getTotalDeArquivos());
         System.out.println(".........................");
 
         System.out.println("\nfinal");

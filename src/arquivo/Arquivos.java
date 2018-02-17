@@ -27,7 +27,7 @@ public class Arquivos extends File {
     public static final String[] EXTENSOES_TEXTOS = {".txt", ".doc", ".PDF"};
     public static final String[] EXTENSOES_VIDEOS = {".mp4", ".WMA", ".avi"};
     public static final String[] EXTENSOES_COMPACTADOS = {".ZIP", ".RAR", ".7z"};
-    private static ArrayList<File>  filesIginorados;
+    private static ArrayList<File>  filesIginorados = new ArrayList<>();
 
     public static ArrayList<File> getFilesIginorados() {
         return filesIginorados;
@@ -162,8 +162,7 @@ public class Arquivos extends File {
                 throw new RuntimeException("Extensão não Informada!");
             }
             ArrayList<File> arrayFile = new ArrayList<>();
-
-            ArrayList<File> files;
+            ArrayList<File> files = new ArrayList<>();
 
             for (File f : file.listFiles()) {
 
@@ -174,7 +173,7 @@ public class Arquivos extends File {
                     }
 
                 } else if (f.getName().toLowerCase().endsWith(extensao.toLowerCase())) {
-                    if(f.length() > tamMax){
+                    if(f.length() >= tamMax){
                        filesIginorados.add(f);
                     }else{
                         arrayFile.add(f);

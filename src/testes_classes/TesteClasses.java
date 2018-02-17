@@ -6,6 +6,7 @@
 package testes_classes;
 
 import arquivo.Arquivos;
+import java.io.File;
 
 /**
  *
@@ -14,8 +15,10 @@ import arquivo.Arquivos;
 class TesteClasses {
 
     public static void main(String[] args) {
-        testePegaEstensaoArquivos();
-        testeCopiarArquivo();
+        //testePegaEstensaoArquivos();
+        //testeCopiarArquivo();
+        
+        buscaArquivosTeste();
     }
 
     private static void testePegaEstensaoArquivos() {
@@ -80,9 +83,9 @@ class TesteClasses {
 
         System.out.println("Teste pega copiar arquivos com mais de um um Giga");
 
-        System.out.println("Iniciar a copiar\n");
+        System.out.println("Iniciar a busca\n");
 
-        Arquivos.buscaArquivos(new Arquivos("D:\\aquivos andre\\Nova pasta"),".iso");
+        Arquivos.buscaArquivos(new Arquivos("D:\\windwos 10"),".iso");
         System.out.println("\nTotal de arquivo inginirados: " + Arquivos.getFilesIginorados());
         System.out.println("\nTotal de arquivo arquivos Encontrado: " + Arquivos.getFilesIginorados());
         System.out.println(".........................");
@@ -91,6 +94,10 @@ class TesteClasses {
 
         System.out.println("\nTeste concluido com sucesso!");
 
+    }
+
+    private static void buscaArquivosTeste() {
+        Arquivos.moverArquivoTipoFotos(new File("C:","teste"), new File("c:", "destino"));
     }
 
 }

@@ -5,7 +5,6 @@
  */
 package arquivo;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,26 +17,24 @@ import java.util.ArrayList;
  * @author Andre
  */
 public class Arquivos extends File {
-
+   
     private static File file;
     private static byte[] Arquivo;
     private static int totalDeArquivos;
+    private static ArrayList<File> filesInginorados = new ArrayList<File>();
     public static final String[] EXTENSOES_FOTOS = {".png", ".jpg", ".JPEG", ".GIF"};
     public static final String[] EXTENSOES_MUSICAS = {".mp3", ".opus"};
     public static final String[] EXTENSOES_TEXTOS = {".txt", ".doc", ".PDF"};
     public static final String[] EXTENSOES_VIDEOS = {".mp4", ".WMA", ".avi"};
     public static final String[] EXTENSOES_COMPACTADOS = {".ZIP", ".RAR", ".7z"};
-    private static ArrayList<File>  filesIginorados = new ArrayList<>();
 
-    public static ArrayList<File> getFilesIginorados() {
-        return filesIginorados;
+    public static ArrayList<File> getFilesInginorados() {
+        return filesInginorados;
     }
 
-    private static void setFilesIginorados(ArrayList<File> filesIginorados) {
-        Arquivos.filesIginorados = filesIginorados;
+    private static void setFilesInginorados(ArrayList<File> filesInginorados) {
+        Arquivos.filesInginorados = filesInginorados;
     }
-
-    
 
     private static void setTotalDeArquivos(int totalDeArquivos) {
         Arquivos.totalDeArquivos = totalDeArquivos;
@@ -174,15 +171,15 @@ public class Arquivos extends File {
 
                 } else if (f.getName().toLowerCase().endsWith(extensao.toLowerCase())) {
                     if(f.length() >= tamMax){
-                       filesIginorados.add(f);
+                       filesInginorados.add(f);
                     }else{
                         arrayFile.add(f);
                     }
-                    
+
                 }
             }
 
-            setTotalDeArquivos(arrayFile.size() + filesIginorados.size());
+            setTotalDeArquivos(arrayFile.size() + filesInginorados.size());
             return arrayFile;
         } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage());
@@ -284,7 +281,7 @@ public class Arquivos extends File {
     }
 
     public static void moverArquivoTipoFotos(File diretorioDeBusca, File diretorioDestino) {
-        for (String ex : EXTENSOES_FOTOS){
+        for (String ex : EXTENSOES_FOTOS) {
             moverArquivos(diretorioDeBusca, diretorioDestino, ex);
         }
     }
@@ -296,7 +293,7 @@ public class Arquivos extends File {
     }
 
     public static void moverArquivoTipoVideo(File diretorioDeBusca, File diretorioDestino) {
-        for (String ex : EXTENSOES_VIDEOS){
+        for (String ex : EXTENSOES_VIDEOS) {
             moverArquivos(diretorioDeBusca, diretorioDestino, ex);
         }
     }

@@ -18,7 +18,16 @@ class TesteClasses {
         //testePegaEstensaoArquivos();
         //testeCopiarArquivo();
         
-        buscaArquivosTeste();
+        //buscaArquivosTeste();
+        //testePegaTamnhoArquivos();
+        testeGerarReshArquivo();
+    }
+    
+    private static void testeGerarReshArquivo(){
+        File file = new File("C:\\Pasta Teste//icone_app.jpg");
+        String resh  = Arquivos.getResh(Arquivos.coverterArquivoEmArrayDeByte(file));
+        System.out.println("MD5: " + resh);
+        
     }
 
     private static void testePegaEstensaoArquivos() {
@@ -101,6 +110,15 @@ class TesteClasses {
 
     private static void buscaArquivosTeste() {
         Arquivos.moverArquivoTipoFotos(new File("C:","teste"), new File("c:", "destino"));
+    }
+
+    private static void testePegaTamnhoArquivos() {
+        System.out.println("Teste pega tamnho de  arquivos");
+  
+        System.out.println("\nfinal");
+
+        System.out.println("\nTeste concluido com sucesso!");
+       
     }
 
 }

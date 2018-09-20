@@ -10,7 +10,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import javax.xml.bind.DatatypeConverter;
 
 /**
  *
@@ -173,6 +177,7 @@ public class Arquivos extends File {
                     if(f.length() >= tamMax){
                        filesInginorados.add(f);
                     }else{
+                                             
                         arrayFile.add(f);
                     }
 
@@ -200,6 +205,7 @@ public class Arquivos extends File {
                 if (ff.isDirectory() && !file.isHidden()) {
                     arrayFile.addAll(buscaArquivosSubPasta(ff, extensao));
                 } else if (ff.getName().toLowerCase().endsWith(extensao.toLowerCase())) {
+                   
                     arrayFile.add(ff);
                 }
 
@@ -307,6 +313,25 @@ public class Arquivos extends File {
 
     public Arquivos(String string) {
         super(string);
+    }
+    
+    public static String getResh(byte [] arquivo){
+        
+         try {
+             
+            MessageDigest m = MessageDigest.getInstance("MD5");
+            m.update(arquivo);
+            byte[] md5sum = m.digest();
+            
+           
+            String resultResh = DatatypeConverter.printHexBinary(md5sum).toUpperCase();
+
+            return resultResh;
+
+        } catch (NoSuchAlgorithmException ex) {
+            return  "";
+        }
+        
     }
 
 }
